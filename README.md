@@ -6,6 +6,12 @@ Clone the repo and install the dependencies.
 git clone https://github.com/nazishn/FoodPick.git
 cd FoodPick
 ```
-'''
+```
 npm install
-'''
+```
+Add the connection string and secret string in ```/config/config.js```
+Run ```index.js``` in terminal
+```
+node index.js
+```
+ 
