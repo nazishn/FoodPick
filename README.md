@@ -21,6 +21,6 @@ The default port for the server is ```3000```.
 localhost:3000/
 ```
 #### Signup
-To signup, navigate to '''localhost:3000/signup''' and enter the email and password in the body of the request.
+To signup, navigate to ```localhost:3000/signup``` and enter the email and password in the body of the request.
 #### Signin
-To signin, navigate to '''localhost:3000/signin''' and enter the email and password in the body of the request.
+To signin, navigate to `localhost:3000/signin` and enter the email and password in the body of the request.
