@@ -3,6 +3,13 @@ const User = require('../models/user.model')
 const jwt = require('jsonwebtoken')
 const config= require('../config/config')
 
+
+const validateEmail= email=> {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
+
 /**
  * Returns a token for a given user
  *
@@ -73,6 +80,10 @@ const signin = async (req, res) => {
 const signup = async (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).send({ message: 'need email and password' })
+  }
+  if(!validateEmail(req.body.email))
+  {
+   return res.status(400).send({ message: 'Invalid email' }) 
   }
   try {
     foodie=req.body;
