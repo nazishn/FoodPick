@@ -9,9 +9,18 @@ cd FoodPick
 ```
 npm install
 ```
-Add the connection string and secret string in ```/config/config.js```
-Run ```index.js``` in terminal
+Add the connection string and secret string in ```/config/config.js```.
+
+## Starting Server
+To start server, run ```index.js``` in terminal
 ```
 node index.js
 ```
- 
+The default port for the server is ```3000```.
+```
+localhost:3000/
+```
+#### Signup
+To signup, navigate to '''localhost:3000/signup''' and enter the email and password in the body of the request.
+#### Signin
+To signin, navigate to '''localhost:3000/signin''' and enter the email and password in the body of the request.
