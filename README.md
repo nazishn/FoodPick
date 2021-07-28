@@ -3,6 +3,9 @@ An application that solves the "what's for dinner?" problem. The application has
 ## Getting Started
 Clone the repo and install the dependencies.
 ```
-git clone https://github.com/contentful/the-example-app.nodejs.git
-cd the-example-app.nodejs
+git clone https://github.com/nazishn/FoodPick.git
+cd FoodPick
 ```
+'''
+npm install
+'''
