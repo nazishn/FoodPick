@@ -3,7 +3,12 @@ const User = require('../models/user.model')
 const jwt = require('jsonwebtoken')
 const config= require('../config/config')
 
-
+/**
+ * Returns true if the email is valid
+ *
+ * @param {string} the email address to be checked if it is valid or not
+ * @return {binary} true if the email is valid and false otherwise 
+ */
 const validateEmail= email=> {
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
