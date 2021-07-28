@@ -20,7 +20,28 @@ The default port for the server is ```3000```.
 ```
 localhost:3000/
 ```
-#### Signup
-To signup, navigate to ```localhost:3000/signup``` and enter the email and password in the body of the request.
-#### Signin
-To signin, navigate to `localhost:3000/signin` and enter the email and password in the body of the request.
+## Routes
+Routes for performing different tasks and functions is as follows
+`POST localhost:3000/signup` to sign up.
+`POST localhost:3000/signin` to sign in.
+#### Admin Routes
+`POST /admin/addfood` to add food items.
+`PATCH /admin/addday` to assign days to existing food items.
+`GET /admin/` to fetch food list.
+`POST /admin/findday` to fetch food list based on a particular day.
+`POST /admin/findtype` to fetch food list based in the type of the food.
+`GET /admin/listofvote` to list the votes for all food items for a particular day.
+``GET /admin/placeorder`` to place order.
+``GET /admin/orderhistory`` to list the order history.
+#### User/Foodie Routes
+``GET /foodie/findlist`` to list food items based on the day.
+``POST /foodie/vote`` to cast vote for a particular day.
+
+## Technologies Used
+- Node JS
+- Express
+- MongooDB
+
+## Author
+Nazish Naeem
+
