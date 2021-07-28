@@ -2,14 +2,14 @@
 const foodlist = require('../models/product');
 const vote = require('../models/vote')
 const orderhistory = require('../models/orderhistory')
-
-
-
 const _ = require('underscore')
 
-// admin controllers
-
-// add food items
+/**
+ * Adds a new food item to the database and prints it in the response
+ *
+ * @param req.body={ name: x[String], type: y[String], price: p[number], rating: r[number] } The details of a new food item that is to be added in the database.
+ * @response Prints the new saved object in reponse.
+ **/
 const addfood = async (req, res) => {
     const { name, type, price, rating } = req.body;
     const newProduct = new foodlist({name, type, price, rating});
@@ -17,9 +17,12 @@ const addfood = async (req, res) => {
     res.json(savedObject);
 }
 
-
-// assign days to food items
-
+/**
+ * Assigns days to the existing food item by updating in the database.
+ *
+ * @param req.body={ name: x[String], days: D[Array]} The days D to be assigned to food item x.
+ * @response The updates product
+ **/
 const addday = async (req, res) => {
     const { name, days } = req.body;
     const item = await foodlist.find({"name": name});
@@ -30,16 +33,20 @@ const addday = async (req, res) => {
     res.json(updateProduct);
 }
 
-
-// fetch all the food items
+/**
+ * Lists all food items in the database
+**/
 const findAllProducts = async (req, res) => {
     //const remove = await foodlist.deleteOne({"_id": "60fe759ae98c3000142e8fff"})
     const food = await foodlist.find();
     res.json(food);
 }
 
-
-// fetch food items based on days
+/**
+ * Sends a list of food items which are available for a particular day as response.
+ *
+ * @param req.body={ day: y [string] } The day y for which the list of food items is fetched.
+ **/
 const find_day = async (req, res) => {
     const {day}=req.body;
     const food = await foodlist.find();
@@ -52,7 +59,11 @@ const find_day = async (req, res) => {
     res.send(food_day);
 }
 
-// fetch food items based on type
+/**
+ * Sends a list of food items which are of a particular type as response.
+ *
+ * @param req.body={ type: t [string] } The type t of which the list of food items is fetched.
+ **/
 const find_type = async (req, res) => {
     const {type}=req.body;
     const food = await foodlist.find();
@@ -60,26 +71,29 @@ const find_type = async (req, res) => {
     {
         if (item.type === type)
             {return item.name}
-    }
-    )
+    })
     res.send(food_type);
 }
 
-//food items and votes
+/**
+ * Sends a list of food items and number of votes for each of them for a particular day.
+ *
+ * @param req.body={ day: y [string] } The day y for which the list of food items and their number of votes are needed.
+ * @response lists the number of votes for all the food items for a particular day.
+ **/
 const listofvotes = async (req,res) => {
     const {day} = req.query;
     const v = await vote.find({"day" : day});
     const vote_day=v[0];
-
     const food = await foodlist.find();
     const food_name= _.map(food,(item) => 
     {
         return item.name;
     }
     )
-    var vote_count ={};
-    var max=0;
-    var order_item;
+    let vote_count ={};
+    let max=0;
+    let order_item;
 
     _.each(food_name, (item) => 
     {
@@ -90,24 +104,17 @@ const listofvotes = async (req,res) => {
             max=num}
 
     })
-
-
-
-
     const {_id} =vote_day;
     const updateProduct = await vote.updateOne({_id}, {order_item});
-
     res.send(vote_count)
-
-
-
 }
 
-
-
-
-//place order
-
+/**
+ * Places the order for the most voted food item for a particular day and saves in the order history
+ *
+ * @param req.body={ day: y [string] } The day y for which order is to be placed.
+ * @response the order item details.
+ **/
 const place_order= async (req, res) =>{
     const {day} = req.body;
     const v = await vote.find({"day" : day});
@@ -116,22 +123,15 @@ const place_order= async (req, res) =>{
     const newProduct = new orderhistory({day, order_item});
     const savedObject = await newProduct.save();
     res.json(savedObject);
-
-
 }
 
-
-
-//history of orders
+/**
+* Sends the complete order history in the response
+**/
 const findAllOrder = async (req, res) => {
     const OH = await orderhistory.find();
     res.json(OH);
 }
-
-
-//
-
-
 
 module.exports = {
     findAllProducts,

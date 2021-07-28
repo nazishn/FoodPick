@@ -1,2 +1,3 @@
-const connection_string= ''
-module.exports= connection_string;
+const connection_string= '';
+const secret=''
+module.exports= {connection_string, secret};

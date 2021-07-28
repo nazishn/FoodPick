@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const {findAll, newToken, verifyToken, signin, signup} = require('./user.controllers')
+const {findAll, newToken, verifyToken, signin, signup} = require('../controllers/user.controllers')
 
 const router = Router()
 
